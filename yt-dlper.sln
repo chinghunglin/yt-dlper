@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yt-dlper", "yt-dlper\yt-dlper.csproj", "{3852F13A-20EC-490C-97C2-B476FB04EEFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3852F13A-20EC-490C-97C2-B476FB04EEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3852F13A-20EC-490C-97C2-B476FB04EEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3852F13A-20EC-490C-97C2-B476FB04EEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3852F13A-20EC-490C-97C2-B476FB04EEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CAC5F4A-4AA8-4E15-8E4E-CD1607F4A188}
+	EndGlobalSection
+EndGlobal
