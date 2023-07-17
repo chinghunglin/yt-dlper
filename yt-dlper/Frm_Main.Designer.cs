@@ -53,49 +53,50 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(9, 49);
+            this.label1.Location = new System.Drawing.Point(9, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 21);
+            this.label1.Size = new System.Drawing.Size(90, 42);
             this.label1.TabIndex = 0;
-            this.label1.Text = "影片網址：";
+            this.label1.Text = "影片網址:Links:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Tbx_Link
             // 
             this.Tbx_Link.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Tbx_Link.Location = new System.Drawing.Point(105, 21);
+            this.Tbx_Link.Location = new System.Drawing.Point(112, 21);
             this.Tbx_Link.Multiline = true;
             this.Tbx_Link.Name = "Tbx_Link";
             this.Tbx_Link.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Tbx_Link.Size = new System.Drawing.Size(436, 88);
+            this.Tbx_Link.Size = new System.Drawing.Size(437, 88);
             this.Tbx_Link.TabIndex = 1;
             // 
             // Tbx_Wrk_Dir
             // 
             this.Tbx_Wrk_Dir.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Tbx_Wrk_Dir.Location = new System.Drawing.Point(105, 121);
+            this.Tbx_Wrk_Dir.Location = new System.Drawing.Point(112, 121);
             this.Tbx_Wrk_Dir.Name = "Tbx_Wrk_Dir";
             this.Tbx_Wrk_Dir.ReadOnly = true;
-            this.Tbx_Wrk_Dir.Size = new System.Drawing.Size(499, 29);
+            this.Tbx_Wrk_Dir.Size = new System.Drawing.Size(500, 29);
             this.Tbx_Wrk_Dir.TabIndex = 17;
             this.Tbx_Wrk_Dir.DoubleClick += new System.EventHandler(this.Tbx_Wrk_Dir_DoubleClick);
             // 
             // Btn_Wrk_Dir
             // 
             this.Btn_Wrk_Dir.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_Wrk_Dir.Location = new System.Drawing.Point(6, 120);
+            this.Btn_Wrk_Dir.Location = new System.Drawing.Point(4, 120);
+            this.Btn_Wrk_Dir.Margin = new System.Windows.Forms.Padding(0);
             this.Btn_Wrk_Dir.Name = "Btn_Wrk_Dir";
-            this.Btn_Wrk_Dir.Size = new System.Drawing.Size(93, 30);
+            this.Btn_Wrk_Dir.Size = new System.Drawing.Size(106, 30);
             this.Btn_Wrk_Dir.TabIndex = 18;
-            this.Btn_Wrk_Dir.Text = "下載到：";
+            this.Btn_Wrk_Dir.Text = "下載到(To):";
             this.Btn_Wrk_Dir.UseVisualStyleBackColor = true;
             this.Btn_Wrk_Dir.Click += new System.EventHandler(this.Btn_Wrk_Dir_Click);
             // 
             // Btn_mp4
             // 
             this.Btn_mp4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_mp4.Location = new System.Drawing.Point(397, 173);
+            this.Btn_mp4.Location = new System.Drawing.Point(402, 173);
             this.Btn_mp4.Name = "Btn_mp4";
             this.Btn_mp4.Size = new System.Drawing.Size(97, 36);
             this.Btn_mp4.TabIndex = 19;
@@ -106,7 +107,7 @@
             // Btn_mp3
             // 
             this.Btn_mp3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_mp3.Location = new System.Drawing.Point(500, 173);
+            this.Btn_mp3.Location = new System.Drawing.Point(508, 173);
             this.Btn_mp3.Name = "Btn_mp3";
             this.Btn_mp3.Size = new System.Drawing.Size(104, 36);
             this.Btn_mp3.TabIndex = 20;
@@ -118,7 +119,7 @@
             // 
             this.Tbx_Info.AcceptsReturn = true;
             this.Tbx_Info.Font = new System.Drawing.Font("微軟正黑體", 10F);
-            this.Tbx_Info.Location = new System.Drawing.Point(19, 230);
+            this.Tbx_Info.Location = new System.Drawing.Point(20, 230);
             this.Tbx_Info.Multiline = true;
             this.Tbx_Info.Name = "Tbx_Info";
             this.Tbx_Info.ReadOnly = true;
@@ -130,11 +131,11 @@
             // Btn_Clear_Link
             // 
             this.Btn_Clear_Link.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_Clear_Link.Location = new System.Drawing.Point(552, 40);
+            this.Btn_Clear_Link.Location = new System.Drawing.Point(555, 40);
             this.Btn_Clear_Link.Name = "Btn_Clear_Link";
-            this.Btn_Clear_Link.Size = new System.Drawing.Size(57, 30);
+            this.Btn_Clear_Link.Size = new System.Drawing.Size(57, 51);
             this.Btn_Clear_Link.TabIndex = 22;
-            this.Btn_Clear_Link.Text = "清空";
+            this.Btn_Clear_Link.Text = "清空 Clear";
             this.Btn_Clear_Link.UseVisualStyleBackColor = true;
             this.Btn_Clear_Link.Click += new System.EventHandler(this.Btn_Clear_Link_Click);
             // 
@@ -147,18 +148,18 @@
             this.Cbx_Subs.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
             this.Cbx_Subs.Location = new System.Drawing.Point(6, 16);
             this.Cbx_Subs.Name = "Cbx_Subs";
-            this.Cbx_Subs.Size = new System.Drawing.Size(95, 46);
+            this.Cbx_Subs.Size = new System.Drawing.Size(120, 46);
             this.Cbx_Subs.TabIndex = 23;
-            this.Cbx_Subs.Text = "YT字幕    (如果有)";
+            this.Cbx_Subs.Text = "YT字幕Subs    (如果有)";
             this.Cbx_Subs.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.Cbx_Subs);
-            this.groupBox1.Location = new System.Drawing.Point(13, 156);
+            this.groupBox1.Location = new System.Drawing.Point(6, 156);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(383, 68);
+            this.groupBox1.Size = new System.Drawing.Size(390, 68);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "影片選項";
@@ -169,18 +170,18 @@
             this.groupBox2.Controls.Add(this.Rbn_1440P);
             this.groupBox2.Controls.Add(this.Rbn_1080P);
             this.groupBox2.Controls.Add(this.Rbn_720P);
-            this.groupBox2.Location = new System.Drawing.Point(107, 16);
+            this.groupBox2.Location = new System.Drawing.Point(121, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(270, 46);
+            this.groupBox2.Size = new System.Drawing.Size(260, 46);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "最大解析度";
+            this.groupBox2.Text = "最大解析度 Max Resolution";
             // 
             // Rbn_Unlimited
             // 
             this.Rbn_Unlimited.AutoSize = true;
             this.Rbn_Unlimited.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_Unlimited.Location = new System.Drawing.Point(208, 18);
+            this.Rbn_Unlimited.Location = new System.Drawing.Point(206, 18);
             this.Rbn_Unlimited.Name = "Rbn_Unlimited";
             this.Rbn_Unlimited.Size = new System.Drawing.Size(54, 22);
             this.Rbn_Unlimited.TabIndex = 28;
@@ -191,7 +192,7 @@
             // 
             this.Rbn_1440P.AutoSize = true;
             this.Rbn_1440P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_1440P.Location = new System.Drawing.Point(138, 18);
+            this.Rbn_1440P.Location = new System.Drawing.Point(136, 18);
             this.Rbn_1440P.Name = "Rbn_1440P";
             this.Rbn_1440P.Size = new System.Drawing.Size(67, 22);
             this.Rbn_1440P.TabIndex = 27;
@@ -203,7 +204,7 @@
             this.Rbn_1080P.AutoSize = true;
             this.Rbn_1080P.Checked = true;
             this.Rbn_1080P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_1080P.Location = new System.Drawing.Point(68, 18);
+            this.Rbn_1080P.Location = new System.Drawing.Point(66, 18);
             this.Rbn_1080P.Name = "Rbn_1080P";
             this.Rbn_1080P.Size = new System.Drawing.Size(67, 22);
             this.Rbn_1080P.TabIndex = 26;
@@ -215,7 +216,7 @@
             // 
             this.Rbn_720P.AutoSize = true;
             this.Rbn_720P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_720P.Location = new System.Drawing.Point(6, 18);
+            this.Rbn_720P.Location = new System.Drawing.Point(4, 18);
             this.Rbn_720P.Name = "Rbn_720P";
             this.Rbn_720P.Size = new System.Drawing.Size(59, 22);
             this.Rbn_720P.TabIndex = 25;
@@ -239,7 +240,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Main";
-            this.Text = "簡易影片/音樂下載器 By CHL V 1.1";
+            this.Text = "簡易影片/音樂下載器 Simeple yt-dlp GUI By CHL V 1.3";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

@@ -42,6 +42,37 @@ namespace yt_dlper
             Tbx_Wrk_Dir.Text = Wrk_Dir;
 
             FolderBrowserDialog1.SelectedPath = Wrk_Dir;
+
+            Check_Requirements();
+
+            if (Duplicate_PS()) {
+                MessageBox.Show("相同的程式已經在執行中！Duplicated process is running!");
+                this.Close();
+            }
+        }
+
+        private bool Duplicate_PS()
+        {
+            Process process = Process.GetCurrentProcess();
+            var dupl = (Process.GetProcessesByName(process.ProcessName));
+
+            if (dupl.Length > 1) {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void Check_Requirements()
+        {
+            // check if the yt-dlp.exe exist
+            if (!File.Exists("yt-dlp.exe"))
+            {
+                MessageBox.Show("yt-dlp.exe 不存在 isn't existed!");
+
+                Btn_mp4.Enabled = false;
+                Btn_mp3.Enabled = false;
+            }
         }
 
         private bool Link_NG(string link)
@@ -66,15 +97,19 @@ namespace yt_dlper
 
             if (Link_NG(link))
             {
-                MessageBox.Show("下載連結無效");
+                MessageBox.Show("下載連結無效 Download link invalid.");
                 return;
             }
 
-            Tbx_Info.AppendText("開始嘗試下載\r\n");
+            Tbx_Info.AppendText("開始嘗試下載 Start trying downloading...\r\n");
             Disable_Download_Btns();
 
             // make sure there is space between link and command
             Command += " ";
+
+            // the download Path parameter
+            Command += $" -P \'{Wrk_Dir}\' ";
+
             Command += link.Trim();
             Tbx_Info.AppendText($"{Command}\r\n");
 
@@ -137,6 +172,7 @@ namespace yt_dlper
                 Command += " --write-subs ";
             }
 
+            
             Whole_download();
         }
 
@@ -179,23 +215,23 @@ namespace yt_dlper
         private string Analysis_Download_Result(string str_to_check)
         { 
             if (str_to_check.Contains("has already been downloaded")) {
-                return "已經下載過此檔案。";
+                return "已經下載過此檔案。Already been downloaded";
             }
 
             if (str_to_check.Contains("Merging") 
                 && str_to_check.Contains("Deleting original file"))
             {
-                return "影片下載已完成。";
+                return "影片下載已完成。Download completed.";
             }
 
             if (str_to_check.Contains("[ExtractAudio] Destination")
                 && str_to_check.Contains("mp3")
                 && str_to_check.Contains("Deleting original file"))
             {
-                return "mp3下載已完成。";
+                return "mp3下載已完成。Download completed.";
             }
             
-            return "下載失敗";
+            return "下載失敗！Download failed.";
         }
 
         private void Tbx_Wrk_Dir_DoubleClick(object sender, EventArgs e)
