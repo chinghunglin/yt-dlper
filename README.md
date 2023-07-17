@@ -9,4 +9,4 @@ en_US
 1. You need to download yt-dlp.exe and ffmpeg tools on your own, and put it in the same directory with this little tool.
    Then setup the $PATH Environment Variables on Windows.
 2. This tool support tradition-Chinese only now, although the interface has some English words.
-3. This tool intend to be used by very few people, so i probably won't update it.
+3. This tool intend to be used by very few people, so I probably won't update it.
