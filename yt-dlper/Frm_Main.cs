@@ -12,6 +12,8 @@ using System.Diagnostics;
 using System.Threading;
 using System.Globalization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Security.Policy;
+using static System.Windows.Forms.LinkLabel;
 
 namespace yt_dlper
 {
@@ -97,7 +99,7 @@ namespace yt_dlper
 
             if (Link_NG(link))
             {
-                MessageBox.Show("下載連結無效 Download link invalid.");
+                MessageBox.Show($"{link}下載連結無效 Download link invalid.");
                 return;
             }
 
@@ -191,6 +193,11 @@ namespace yt_dlper
 
             foreach (string link in links)
             {
+                if(link.Trim().Length == 0)
+                {
+                    continue;
+                }
+
                 single_download(link);
             }
         }
@@ -250,6 +257,48 @@ namespace yt_dlper
         private void Tbx_Info_DoubleClick(object sender, EventArgs e)
         {
             Tbx_Info.Text = string.Empty;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/chinghunglin/yt-dlper");
+        }
+
+        private void Btn_Update_yt_dlp_Click(object sender, EventArgs e)
+        {
+            Tbx_Info.Text = string.Empty;
+
+            Disable_Download_Btns();
+
+            // make sure there is space between link and command
+            Command = "yt-dlp.exe -U";
+
+            Tbx_Info.AppendText($"{Command}\r\n");
+
+            // 建立 Process 物件並設定相關屬性
+            Process process = new Process();
+            process.StartInfo.FileName = "powershell.exe";
+            process.StartInfo.Arguments = $"-Command \"{Command}\"";
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+
+            // 開始執行 PowerShell
+            process.Start();
+
+            // 讀取輸出
+            string output = process.StandardOutput.ReadToEnd();
+
+            // 等待 PowerShell 執行完畢
+            process.WaitForExit();
+
+            // 將換行符號轉換為 TextBox 所需的換行格式
+            output = output.Replace("\n", "\r\n");
+
+            // 顯示powershell執行過程
+            Tbx_Info.AppendText(output);
+            
+            Enable_Download_Btns();
         }
     }
 }

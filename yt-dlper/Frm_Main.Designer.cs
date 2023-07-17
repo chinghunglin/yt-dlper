@@ -47,6 +47,8 @@
             this.Rbn_1440P = new System.Windows.Forms.RadioButton();
             this.Rbn_1080P = new System.Windows.Forms.RadioButton();
             this.Rbn_720P = new System.Windows.Forms.RadioButton();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.Btn_Update_yt_dlp = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -202,33 +204,56 @@
             // Rbn_1080P
             // 
             this.Rbn_1080P.AutoSize = true;
-            this.Rbn_1080P.Checked = true;
             this.Rbn_1080P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
             this.Rbn_1080P.Location = new System.Drawing.Point(66, 18);
             this.Rbn_1080P.Name = "Rbn_1080P";
             this.Rbn_1080P.Size = new System.Drawing.Size(67, 22);
             this.Rbn_1080P.TabIndex = 26;
-            this.Rbn_1080P.TabStop = true;
             this.Rbn_1080P.Text = "1080P";
             this.Rbn_1080P.UseVisualStyleBackColor = true;
             // 
             // Rbn_720P
             // 
             this.Rbn_720P.AutoSize = true;
+            this.Rbn_720P.Checked = true;
             this.Rbn_720P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
             this.Rbn_720P.Location = new System.Drawing.Point(4, 18);
             this.Rbn_720P.Name = "Rbn_720P";
             this.Rbn_720P.Size = new System.Drawing.Size(59, 22);
             this.Rbn_720P.TabIndex = 25;
+            this.Rbn_720P.TabStop = true;
             this.Rbn_720P.Text = "720P";
             this.Rbn_720P.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(19, 443);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(194, 12);
+            this.linkLabel1.TabIndex = 26;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://github.com/chinghunglin/yt-dlper";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // Btn_Update_yt_dlp
+            // 
+            this.Btn_Update_yt_dlp.Location = new System.Drawing.Point(508, 437);
+            this.Btn_Update_yt_dlp.Name = "Btn_Update_yt_dlp";
+            this.Btn_Update_yt_dlp.Size = new System.Drawing.Size(104, 23);
+            this.Btn_Update_yt_dlp.TabIndex = 27;
+            this.Btn_Update_yt_dlp.Text = "升級 yt_dlp.exe";
+            this.Btn_Update_yt_dlp.UseVisualStyleBackColor = true;
+            this.Btn_Update_yt_dlp.Click += new System.EventHandler(this.Btn_Update_yt_dlp_Click);
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGreen;
-            this.ClientSize = new System.Drawing.Size(621, 445);
+            this.ClientSize = new System.Drawing.Size(621, 463);
+            this.Controls.Add(this.Btn_Update_yt_dlp);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Btn_mp4);
             this.Controls.Add(this.Btn_Clear_Link);
@@ -240,7 +265,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Main";
-            this.Text = "簡易影片/音樂下載器 Simeple yt-dlp GUI By CHL V 1.3";
+            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v1.4";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -269,6 +294,8 @@
         private System.Windows.Forms.RadioButton Rbn_1440P;
         private System.Windows.Forms.RadioButton Rbn_1080P;
         private System.Windows.Forms.RadioButton Rbn_720P;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button Btn_Update_yt_dlp;
     }
 }
 
