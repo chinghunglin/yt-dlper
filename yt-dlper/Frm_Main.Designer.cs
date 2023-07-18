@@ -125,7 +125,7 @@
             this.Tbx_Info.Multiline = true;
             this.Tbx_Info.Name = "Tbx_Info";
             this.Tbx_Info.ReadOnly = true;
-            this.Tbx_Info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Tbx_Info.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.Tbx_Info.Size = new System.Drawing.Size(592, 201);
             this.Tbx_Info.TabIndex = 21;
             this.Tbx_Info.DoubleClick += new System.EventHandler(this.Tbx_Info_DoubleClick);
@@ -251,7 +251,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGreen;
-            this.ClientSize = new System.Drawing.Size(621, 463);
+            this.ClientSize = new System.Drawing.Size(619, 461);
             this.Controls.Add(this.Btn_Update_yt_dlp);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox1);
@@ -264,8 +264,12 @@
             this.Controls.Add(this.Tbx_Link);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(635, 500);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(635, 500);
             this.Name = "Frm_Main";
-            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v1.4";
+            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v1.5";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

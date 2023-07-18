@@ -26,6 +26,9 @@ namespace yt_dlper
 
         public string Wrk_Dir { get; private set; }
         public string Command = "";
+        public int Total_cnt = 0;
+        public int OK_cnt = 0;
+        public int NG_cnt = 0;
 
         private void Btn_Wrk_Dir_Click(object sender, EventArgs e)
         {
@@ -93,44 +96,57 @@ namespace yt_dlper
         }
 
 
-        private void single_download(string link)
+        private void Single_Download(string link)
         {
+            String Full_Command = string.Empty;
+
             Tbx_Info.Text = string.Empty;
+            Tbx_Info.Refresh();
 
             if (Link_NG(link))
             {
-                MessageBox.Show($"{link}下載連結無效 Download link invalid.");
+                MessageBox.Show($"{link}下載連結無效 Download link is invalid.");
                 return;
             }
 
-            Tbx_Info.AppendText("開始嘗試下載 Start trying downloading...\r\n");
+            Tbx_Info.AppendText("開始嘗試下載 Start trying download...\r\n");
             Disable_Download_Btns();
 
-            // make sure there is space between link and command
-            Command += " ";
-
             // the download Path parameter
-            Command += $" -P \'{Wrk_Dir}\' ";
+            Full_Command = $"{Command} -P \'{Wrk_Dir}\' {link.Trim()}";
 
-            Command += link.Trim();
-            Tbx_Info.AppendText($"{Command}\r\n");
+            Tbx_Info.AppendText($"{Full_Command}\r\n");
 
             // 建立 Process 物件並設定相關屬性
             Process process = new Process();
             process.StartInfo.FileName = "powershell.exe";
-            process.StartInfo.Arguments = $"-Command \"{Command}\"";
+            process.StartInfo.Arguments = $"-Command \"{Full_Command}\"";
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
+
+            // 清空 StandardOutput
+            process.OutputDataReceived += (sender, e) => { };
 
             // 開始執行 PowerShell
             process.Start();
 
             // 讀取輸出
-            string output = process.StandardOutput.ReadToEnd();
-
+            string output = string.Empty;
+            MessageBox.Show($"[{output}]");
+            output = process.StandardOutput.ReadToEnd();
+                        
             // 等待 PowerShell 執行完畢
             process.WaitForExit();
+
+            // 清除 StandardOutput
+            process.StandardOutput.ReadToEnd();
+
+            //process.StandardOutput.DiscardBufferedData();
+            //process.StandardOutput.Dispose();
+
+            //process.Refresh();
+            //process.Kill();
 
             // 將換行符號轉換為 TextBox 所需的換行格式
             output = output.Replace("\n", "\r\n");
@@ -139,7 +155,14 @@ namespace yt_dlper
             Tbx_Info.AppendText(output);
 
             // 分析執行結果
-            Tbx_Info.AppendText(Analysis_Download_Result(output));
+            Tbx_Info.AppendText(Analysis_Download_Result(output) + "\r\n");
+
+            Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下載OK。");
+
+            if (NG_cnt > 0)
+            {
+                Tbx_Info.AppendText($"{NG_cnt} 下載NG。");
+            }
 
             Enable_Download_Btns();
         }
@@ -198,13 +221,20 @@ namespace yt_dlper
                     continue;
                 }
 
-                single_download(link);
+                Total_cnt++;
+                Single_Download(link);
+
+                Thread.Sleep(500);
             }
         }
 
         private void Btn_Clear_Link_Click(object sender, EventArgs e)
         {
             Tbx_Link.Text = string.Empty;
+            Tbx_Info.Text = string.Empty;
+
+            Tbx_Link.Refresh();
+            Tbx_Info.Refresh();
         }
 
         private void Disable_Download_Btns()
@@ -222,12 +252,14 @@ namespace yt_dlper
         private string Analysis_Download_Result(string str_to_check)
         { 
             if (str_to_check.Contains("has already been downloaded")) {
+                OK_cnt++;
                 return "已經下載過此檔案。Already been downloaded";
             }
 
             if (str_to_check.Contains("Merging") 
                 && str_to_check.Contains("Deleting original file"))
             {
+                OK_cnt++;
                 return "影片下載已完成。Download completed.";
             }
 
@@ -235,9 +267,11 @@ namespace yt_dlper
                 && str_to_check.Contains("mp3")
                 && str_to_check.Contains("Deleting original file"))
             {
+                OK_cnt++;
                 return "mp3下載已完成。Download completed.";
             }
-            
+
+            NG_cnt++;
             return "下載失敗！Download failed.";
         }
 
