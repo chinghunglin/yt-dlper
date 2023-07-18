@@ -134,18 +134,12 @@ namespace yt_dlper
             // 讀取輸出
             string output = string.Empty;
             output = process.StandardOutput.ReadToEnd();
-                        
+
             // 等待 PowerShell 執行完畢
             process.WaitForExit();
 
             // 清除 StandardOutput
             process.StandardOutput.ReadToEnd();
-
-            //process.StandardOutput.DiscardBufferedData();
-            //process.StandardOutput.Dispose();
-
-            //process.Refresh();
-            //process.Kill();
 
             // 將換行符號轉換為 TextBox 所需的換行格式
             output = output.Replace("\n", "\r\n");
@@ -163,7 +157,16 @@ namespace yt_dlper
                 Tbx_Info.AppendText($"{NG_cnt} 下載NG。");
             }
 
+            Reset_Cnt();
+
             Enable_Download_Btns();
+        }
+
+        private void Reset_Cnt()
+        {
+            OK_cnt = 0;
+            NG_cnt = 0;
+            Total_cnt = 0;
         }
 
         private void Btn_mp4_Click(object sender, EventArgs e)
@@ -234,6 +237,8 @@ namespace yt_dlper
 
             Tbx_Link.Refresh();
             Tbx_Info.Refresh();
+
+            Reset_Cnt();
         }
 
         private void Disable_Download_Btns()
