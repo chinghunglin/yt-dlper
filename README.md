@@ -6,9 +6,21 @@ zh_TW
 3. 只是幫人寫隻圖個方便的小工具，所以可能不太會更新。
 4. 快速連點兩次下載目錄字串可以開啟該資料夾。
 
+相依性：
+最少需要yt-dlp.exe
+
+建議安裝：
+ffmpeg
+
 en_US
 1. You need to download yt-dlp.exe and ffmpeg tools on your own, and put it in the same directory with this little tool.
    Then setup the $PATH Environment Variables on Windows.
 2. This tool support tradition-Chinese only now, although the interface has some English words.
 3. This tool intend to be used by very few people, so I probably won't update it.
 4. Double click the textbox of download location can open a file explorer to that directory.
+
+Dependency/Mininum Requirement:
+yt-dlp.exe
+
+Recommanded software:
+ffmpeg
