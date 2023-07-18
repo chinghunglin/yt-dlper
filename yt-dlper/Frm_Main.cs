@@ -133,7 +133,6 @@ namespace yt_dlper
 
             // 讀取輸出
             string output = string.Empty;
-            MessageBox.Show($"[{output}]");
             output = process.StandardOutput.ReadToEnd();
                         
             // 等待 PowerShell 執行完畢

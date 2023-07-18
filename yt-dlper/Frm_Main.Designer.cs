@@ -238,11 +238,11 @@
             // 
             // Btn_Update_yt_dlp
             // 
-            this.Btn_Update_yt_dlp.Location = new System.Drawing.Point(508, 437);
+            this.Btn_Update_yt_dlp.Location = new System.Drawing.Point(484, 437);
             this.Btn_Update_yt_dlp.Name = "Btn_Update_yt_dlp";
-            this.Btn_Update_yt_dlp.Size = new System.Drawing.Size(104, 23);
+            this.Btn_Update_yt_dlp.Size = new System.Drawing.Size(128, 23);
             this.Btn_Update_yt_dlp.TabIndex = 27;
-            this.Btn_Update_yt_dlp.Text = "升級 yt_dlp.exe";
+            this.Btn_Update_yt_dlp.Text = "update 升級 yt_dlp.exe";
             this.Btn_Update_yt_dlp.UseVisualStyleBackColor = true;
             this.Btn_Update_yt_dlp.Click += new System.EventHandler(this.Btn_Update_yt_dlp_Click);
             // 
@@ -266,7 +266,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(635, 500);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(635, 500);
             this.Name = "Frm_Main";
             this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v1.5";
