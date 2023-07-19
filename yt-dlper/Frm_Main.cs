@@ -156,9 +156,7 @@ namespace yt_dlper
             {
                 Tbx_Info.AppendText($"{NG_cnt} 下載NG。");
             }
-
-            Reset_Cnt();
-
+            
             Enable_Download_Btns();
         }
 
@@ -228,6 +226,8 @@ namespace yt_dlper
 
                 Thread.Sleep(500);
             }
+
+            Reset_Cnt();
         }
 
         private void Btn_Clear_Link_Click(object sender, EventArgs e)
