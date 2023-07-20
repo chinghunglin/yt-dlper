@@ -37,7 +37,6 @@
             this.FolderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.Btn_mp4 = new System.Windows.Forms.Button();
             this.Btn_mp3 = new System.Windows.Forms.Button();
-            this.Tbx_Info = new System.Windows.Forms.TextBox();
             this.Btn_Clear_Link = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Cbx_Subs = new System.Windows.Forms.CheckBox();
@@ -49,6 +48,7 @@
             this.Rbn_720P = new System.Windows.Forms.RadioButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.Btn_Update_yt_dlp = new System.Windows.Forms.Button();
+            this.Tbx_Info = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +72,7 @@
             this.Tbx_Link.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.Tbx_Link.Size = new System.Drawing.Size(437, 88);
             this.Tbx_Link.TabIndex = 1;
+            this.Tbx_Link.Text = "https://www.youtube.com/watch?v=SPIjd0mf5MQ";
             // 
             // Tbx_Wrk_Dir
             // 
@@ -116,19 +117,6 @@
             this.Btn_mp3.Text = "只下載MP3";
             this.Btn_mp3.UseVisualStyleBackColor = true;
             this.Btn_mp3.Click += new System.EventHandler(this.Btn_mp3_Click);
-            // 
-            // Tbx_Info
-            // 
-            this.Tbx_Info.AcceptsReturn = true;
-            this.Tbx_Info.Font = new System.Drawing.Font("微軟正黑體", 10F);
-            this.Tbx_Info.Location = new System.Drawing.Point(20, 230);
-            this.Tbx_Info.Multiline = true;
-            this.Tbx_Info.Name = "Tbx_Info";
-            this.Tbx_Info.ReadOnly = true;
-            this.Tbx_Info.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.Tbx_Info.Size = new System.Drawing.Size(592, 201);
-            this.Tbx_Info.TabIndex = 21;
-            this.Tbx_Info.DoubleClick += new System.EventHandler(this.Tbx_Info_DoubleClick);
             // 
             // Btn_Clear_Link
             // 
@@ -246,18 +234,28 @@
             this.Btn_Update_yt_dlp.UseVisualStyleBackColor = true;
             this.Btn_Update_yt_dlp.Click += new System.EventHandler(this.Btn_Update_yt_dlp_Click);
             // 
+            // Tbx_Info
+            // 
+            this.Tbx_Info.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Tbx_Info.Location = new System.Drawing.Point(8, 231);
+            this.Tbx_Info.Name = "Tbx_Info";
+            this.Tbx_Info.ReadOnly = true;
+            this.Tbx_Info.Size = new System.Drawing.Size(600, 200);
+            this.Tbx_Info.TabIndex = 28;
+            this.Tbx_Info.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGreen;
             this.ClientSize = new System.Drawing.Size(619, 461);
+            this.Controls.Add(this.Tbx_Info);
             this.Controls.Add(this.Btn_Update_yt_dlp);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Btn_mp4);
             this.Controls.Add(this.Btn_Clear_Link);
-            this.Controls.Add(this.Tbx_Info);
             this.Controls.Add(this.Btn_mp3);
             this.Controls.Add(this.Btn_Wrk_Dir);
             this.Controls.Add(this.Tbx_Wrk_Dir);
@@ -268,7 +266,7 @@
             this.MaximumSize = new System.Drawing.Size(635, 500);
             this.MinimumSize = new System.Drawing.Size(635, 500);
             this.Name = "Frm_Main";
-            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v1.5";
+            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v1.5.3";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -287,7 +285,6 @@
         internal System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog1;
         internal System.Windows.Forms.Button Btn_mp4;
         internal System.Windows.Forms.Button Btn_mp3;
-        private System.Windows.Forms.TextBox Tbx_Info;
         internal System.Windows.Forms.Button Btn_Clear_Link;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox Cbx_Subs;
@@ -299,6 +296,7 @@
         private System.Windows.Forms.RadioButton Rbn_720P;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button Btn_Update_yt_dlp;
+        private System.Windows.Forms.RichTextBox Tbx_Info;
     }
 }
 

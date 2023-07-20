@@ -14,6 +14,7 @@ using System.Globalization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Policy;
 using static System.Windows.Forms.LinkLabel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace yt_dlper
 {
@@ -124,7 +125,8 @@ namespace yt_dlper
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
-
+            //process.StartInfo.StandardOutputEncoding = Encoding.UTF8;
+            
             // 清空 StandardOutput
             process.OutputDataReceived += (sender, e) => { };
 
@@ -144,8 +146,11 @@ namespace yt_dlper
             // 將換行符號轉換為 TextBox 所需的換行格式
             output = output.Replace("\n", "\r\n");
 
+            MessageBox.Show(process.StandardOutput.CurrentEncoding.ToString() + "\r\n" + output);
+
             // 顯示powershell執行過程
             Tbx_Info.AppendText(output);
+            //Tbx_Info.AppendText(string.Format("N'{0}'", output));
 
             // 分析執行結果
             Tbx_Info.AppendText(Analysis_Download_Result(output) + "\r\n");
@@ -221,8 +226,11 @@ namespace yt_dlper
                     continue;
                 }
 
+                // 使用&作為分隔符號將字串拆分成子字串，藉此去除掉從&開始的字元
+                string[] substrings = link.Split('&');
+
                 Total_cnt++;
-                Single_Download(link);
+                Single_Download(substrings[0]);
 
                 Thread.Sleep(500);
             }
@@ -273,6 +281,14 @@ namespace yt_dlper
             {
                 OK_cnt++;
                 return "mp3下載已完成。Download completed.";
+            }
+
+            // for facebook
+            if (str_to_check.Contains("facebook") 
+                && str_to_check.Contains("100%"))
+            {
+                OK_cnt++;
+                return "影片下載已完成。Download completed.";
             }
 
             NG_cnt++;
@@ -333,9 +349,12 @@ namespace yt_dlper
             // 將換行符號轉換為 TextBox 所需的換行格式
             output = output.Replace("\n", "\r\n");
 
+            MessageBox.Show(output);
+
             // 顯示powershell執行過程
-            Tbx_Info.AppendText(output);
-            
+            //Tbx_Info.AppendText(output);
+            Tbx_Info.AppendText(string.Format("N'{0}'", output));
+
             Enable_Download_Btns();
         }
     }
