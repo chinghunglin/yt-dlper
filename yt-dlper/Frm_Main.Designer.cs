@@ -72,7 +72,6 @@
             this.Tbx_Link.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.Tbx_Link.Size = new System.Drawing.Size(437, 88);
             this.Tbx_Link.TabIndex = 1;
-            this.Tbx_Link.Text = "https://www.youtube.com/watch?v=SPIjd0mf5MQ";
             // 
             // Tbx_Wrk_Dir
             // 
