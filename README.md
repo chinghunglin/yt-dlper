@@ -7,6 +7,7 @@ zh_TW
 4. 快速連點兩次下載目錄字串可以開啟該資料夾。
 
 相依性：
+.Net Framework 4.5
 最少需要yt-dlp.exe
 
 建議安裝：
@@ -20,6 +21,7 @@ en_US
 4. Double click the textbox of download location can open a file explorer to that directory.
 
 Dependency/Mininum Requirement:
+.Net Framework 4.5
 yt-dlp.exe
 
 Recommanded software:
