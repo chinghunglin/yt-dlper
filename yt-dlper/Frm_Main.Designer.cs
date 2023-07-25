@@ -265,7 +265,7 @@
             this.MaximumSize = new System.Drawing.Size(635, 500);
             this.MinimumSize = new System.Drawing.Size(635, 500);
             this.Name = "Frm_Main";
-            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v1.5.3";
+            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
