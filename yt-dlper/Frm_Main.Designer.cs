@@ -39,13 +39,13 @@
             this.Btn_mp3 = new System.Windows.Forms.Button();
             this.Btn_Clear_Link = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.Cbx_Subs = new System.Windows.Forms.CheckBox();
+            this.Cbx_YT_Subs = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Rbn_Unlimited = new System.Windows.Forms.RadioButton();
-            this.Rbn_1440P = new System.Windows.Forms.RadioButton();
-            this.Rbn_1080P = new System.Windows.Forms.RadioButton();
-            this.Rbn_720P = new System.Windows.Forms.RadioButton();
+            this.Rbn_Res_Unlimited = new System.Windows.Forms.RadioButton();
+            this.Rbn_Res_1440P = new System.Windows.Forms.RadioButton();
+            this.Rbn_Res_1080P = new System.Windows.Forms.RadioButton();
+            this.Rbn_Res_720P = new System.Windows.Forms.RadioButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.Btn_Update_yt_dlp = new System.Windows.Forms.Button();
             this.Tbx_Info = new System.Windows.Forms.RichTextBox();
@@ -132,20 +132,20 @@
             // 
             this.timer1.Interval = 1000;
             // 
-            // Cbx_Subs
+            // Cbx_YT_Subs
             // 
-            this.Cbx_Subs.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Cbx_Subs.Location = new System.Drawing.Point(6, 16);
-            this.Cbx_Subs.Name = "Cbx_Subs";
-            this.Cbx_Subs.Size = new System.Drawing.Size(120, 46);
-            this.Cbx_Subs.TabIndex = 23;
-            this.Cbx_Subs.Text = "YT字幕Subs    (如果有)";
-            this.Cbx_Subs.UseVisualStyleBackColor = true;
+            this.Cbx_YT_Subs.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.Cbx_YT_Subs.Location = new System.Drawing.Point(6, 16);
+            this.Cbx_YT_Subs.Name = "Cbx_YT_Subs";
+            this.Cbx_YT_Subs.Size = new System.Drawing.Size(120, 46);
+            this.Cbx_YT_Subs.TabIndex = 23;
+            this.Cbx_YT_Subs.Text = "YT字幕Subs    (如果有)";
+            this.Cbx_YT_Subs.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.Cbx_Subs);
+            this.groupBox1.Controls.Add(this.Cbx_YT_Subs);
             this.groupBox1.Location = new System.Drawing.Point(6, 156);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(390, 68);
@@ -155,62 +155,62 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.Rbn_Unlimited);
-            this.groupBox2.Controls.Add(this.Rbn_1440P);
-            this.groupBox2.Controls.Add(this.Rbn_1080P);
-            this.groupBox2.Controls.Add(this.Rbn_720P);
+            this.groupBox2.Controls.Add(this.Rbn_Res_Unlimited);
+            this.groupBox2.Controls.Add(this.Rbn_Res_1440P);
+            this.groupBox2.Controls.Add(this.Rbn_Res_1080P);
+            this.groupBox2.Controls.Add(this.Rbn_Res_720P);
             this.groupBox2.Location = new System.Drawing.Point(121, 16);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(260, 46);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "最大解析度 Max Resolution";
+            this.groupBox2.Text = "YT最大解析度 Max Resolution";
             // 
-            // Rbn_Unlimited
+            // Rbn_Res_Unlimited
             // 
-            this.Rbn_Unlimited.AutoSize = true;
-            this.Rbn_Unlimited.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_Unlimited.Location = new System.Drawing.Point(206, 18);
-            this.Rbn_Unlimited.Name = "Rbn_Unlimited";
-            this.Rbn_Unlimited.Size = new System.Drawing.Size(54, 22);
-            this.Rbn_Unlimited.TabIndex = 28;
-            this.Rbn_Unlimited.Text = "不限";
-            this.Rbn_Unlimited.UseVisualStyleBackColor = true;
+            this.Rbn_Res_Unlimited.AutoSize = true;
+            this.Rbn_Res_Unlimited.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
+            this.Rbn_Res_Unlimited.Location = new System.Drawing.Point(206, 18);
+            this.Rbn_Res_Unlimited.Name = "Rbn_Res_Unlimited";
+            this.Rbn_Res_Unlimited.Size = new System.Drawing.Size(54, 22);
+            this.Rbn_Res_Unlimited.TabIndex = 28;
+            this.Rbn_Res_Unlimited.Text = "不限";
+            this.Rbn_Res_Unlimited.UseVisualStyleBackColor = true;
             // 
-            // Rbn_1440P
+            // Rbn_Res_1440P
             // 
-            this.Rbn_1440P.AutoSize = true;
-            this.Rbn_1440P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_1440P.Location = new System.Drawing.Point(136, 18);
-            this.Rbn_1440P.Name = "Rbn_1440P";
-            this.Rbn_1440P.Size = new System.Drawing.Size(67, 22);
-            this.Rbn_1440P.TabIndex = 27;
-            this.Rbn_1440P.Text = "1440P";
-            this.Rbn_1440P.UseVisualStyleBackColor = true;
+            this.Rbn_Res_1440P.AutoSize = true;
+            this.Rbn_Res_1440P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
+            this.Rbn_Res_1440P.Location = new System.Drawing.Point(136, 18);
+            this.Rbn_Res_1440P.Name = "Rbn_Res_1440P";
+            this.Rbn_Res_1440P.Size = new System.Drawing.Size(67, 22);
+            this.Rbn_Res_1440P.TabIndex = 27;
+            this.Rbn_Res_1440P.Text = "1440P";
+            this.Rbn_Res_1440P.UseVisualStyleBackColor = true;
             // 
-            // Rbn_1080P
+            // Rbn_Res_1080P
             // 
-            this.Rbn_1080P.AutoSize = true;
-            this.Rbn_1080P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_1080P.Location = new System.Drawing.Point(66, 18);
-            this.Rbn_1080P.Name = "Rbn_1080P";
-            this.Rbn_1080P.Size = new System.Drawing.Size(67, 22);
-            this.Rbn_1080P.TabIndex = 26;
-            this.Rbn_1080P.Text = "1080P";
-            this.Rbn_1080P.UseVisualStyleBackColor = true;
+            this.Rbn_Res_1080P.AutoSize = true;
+            this.Rbn_Res_1080P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
+            this.Rbn_Res_1080P.Location = new System.Drawing.Point(66, 18);
+            this.Rbn_Res_1080P.Name = "Rbn_Res_1080P";
+            this.Rbn_Res_1080P.Size = new System.Drawing.Size(67, 22);
+            this.Rbn_Res_1080P.TabIndex = 26;
+            this.Rbn_Res_1080P.Text = "1080P";
+            this.Rbn_Res_1080P.UseVisualStyleBackColor = true;
             // 
-            // Rbn_720P
+            // Rbn_Res_720P
             // 
-            this.Rbn_720P.AutoSize = true;
-            this.Rbn_720P.Checked = true;
-            this.Rbn_720P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
-            this.Rbn_720P.Location = new System.Drawing.Point(4, 18);
-            this.Rbn_720P.Name = "Rbn_720P";
-            this.Rbn_720P.Size = new System.Drawing.Size(59, 22);
-            this.Rbn_720P.TabIndex = 25;
-            this.Rbn_720P.TabStop = true;
-            this.Rbn_720P.Text = "720P";
-            this.Rbn_720P.UseVisualStyleBackColor = true;
+            this.Rbn_Res_720P.AutoSize = true;
+            this.Rbn_Res_720P.Checked = true;
+            this.Rbn_Res_720P.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold);
+            this.Rbn_Res_720P.Location = new System.Drawing.Point(4, 18);
+            this.Rbn_Res_720P.Name = "Rbn_Res_720P";
+            this.Rbn_Res_720P.Size = new System.Drawing.Size(59, 22);
+            this.Rbn_Res_720P.TabIndex = 25;
+            this.Rbn_Res_720P.TabStop = true;
+            this.Rbn_Res_720P.Text = "720P";
+            this.Rbn_Res_720P.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
             // 
@@ -265,7 +265,7 @@
             this.MaximumSize = new System.Drawing.Size(635, 500);
             this.MinimumSize = new System.Drawing.Size(635, 500);
             this.Name = "Frm_Main";
-            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL";
+            this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -286,13 +286,13 @@
         internal System.Windows.Forms.Button Btn_mp3;
         internal System.Windows.Forms.Button Btn_Clear_Link;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.CheckBox Cbx_Subs;
+        private System.Windows.Forms.CheckBox Cbx_YT_Subs;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton Rbn_Unlimited;
-        private System.Windows.Forms.RadioButton Rbn_1440P;
-        private System.Windows.Forms.RadioButton Rbn_1080P;
-        private System.Windows.Forms.RadioButton Rbn_720P;
+        private System.Windows.Forms.RadioButton Rbn_Res_Unlimited;
+        private System.Windows.Forms.RadioButton Rbn_Res_1440P;
+        private System.Windows.Forms.RadioButton Rbn_Res_1080P;
+        private System.Windows.Forms.RadioButton Rbn_Res_720P;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button Btn_Update_yt_dlp;
         private System.Windows.Forms.RichTextBox Tbx_Info;

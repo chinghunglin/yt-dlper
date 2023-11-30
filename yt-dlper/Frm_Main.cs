@@ -15,6 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Policy;
 using static System.Windows.Forms.LinkLabel;
 using static System.Net.Mime.MediaTypeNames;
+using System.Reflection;
 
 namespace yt_dlper
 {
@@ -26,10 +27,13 @@ namespace yt_dlper
         }
 
         public string Wrk_Dir { get; private set; }
-        public string Command = "";
-        public int Total_cnt = 0;
-        public int OK_cnt = 0;
-        public int NG_cnt = 0;
+        private string Command = "";
+        private string Exe_Name = "yt-dlp.exe ";
+        private string YT_Vid_Parameters = "";
+        private string Mp3_Parameters = "";
+        private int Total_cnt = 0;
+        private int OK_cnt = 0;
+        private int NG_cnt = 0;
 
         private void Btn_Wrk_Dir_Click(object sender, EventArgs e)
         {
@@ -51,18 +55,22 @@ namespace yt_dlper
 
             Check_Requirements();
 
-            if (Duplicate_PS()) {
+            if (Same_Proc()) {
                 MessageBox.Show("相同的程式已經在執行中！Duplicated process is running!");
                 this.Close();
             }
+
+            // setting window title with version number
+            this.Text += File_Version();
         }
 
-        private bool Duplicate_PS()
+        private bool Same_Proc()
         {
             Process process = Process.GetCurrentProcess();
-            var dupl = (Process.GetProcessesByName(process.ProcessName));
+            var dupl = Process.GetProcessesByName(process.ProcessName);
 
             if (dupl.Length > 1) {
+                //MessageBox.Show($"{process.ProcessName} have {dupl.Length} processes!!!");
                 return true;
             }
 
@@ -102,7 +110,6 @@ namespace yt_dlper
             String Full_Command = string.Empty;
 
             Tbx_Info.Text = string.Empty;
-            Tbx_Info.Refresh();
 
             if (Link_NG(link))
             {
@@ -110,11 +117,23 @@ namespace yt_dlper
                 return;
             }
 
-            Tbx_Info.AppendText("開始嘗試下載 Start trying download...\r\n");
+            Tbx_Info.AppendText($"開始嘗試下載第{Total_cnt}個連結\r\n" + 
+                    $"Start trying download No.{Total_cnt} link...\r\n");
+            Tbx_Info.Refresh();
             Disable_Download_Btns();
 
-            // the download Path parameter
-            Full_Command = $"{Command} -P \'{Wrk_Dir}\' {link.Trim()}";
+    
+            if (Is_YT_Link(link))
+            {
+                Full_Command = $"{Exe_Name} {YT_Vid_Parameters} {Mp3_Parameters}";
+            }
+            else 
+            {
+                Full_Command = $"{Exe_Name} {Mp3_Parameters}";
+            }
+
+            // add the download Path parameter and link
+            Full_Command += $" -P \'{Wrk_Dir}\'  {link.Trim()}";
 
             Tbx_Info.AppendText($"{Full_Command}\r\n");
 
@@ -146,8 +165,6 @@ namespace yt_dlper
             // 將換行符號轉換為 TextBox 所需的換行格式
             output = output.Replace("\n", "\r\n");
 
-            MessageBox.Show(process.StandardOutput.CurrentEncoding.ToString() + "\r\n" + output);
-
             // 顯示powershell執行過程
             Tbx_Info.AppendText(output);
             //Tbx_Info.AppendText(string.Format("N'{0}'", output));
@@ -157,9 +174,14 @@ namespace yt_dlper
 
             Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下載OK。");
 
+            Tbx_Info.SelectionLength = 0;
+            Tbx_Info.SelectionStart = Tbx_Info.Text.Length;
+            Tbx_Info.Focus();
+            Tbx_Info.ScrollToCaret();
+
             if (NG_cnt > 0)
             {
-                Tbx_Info.AppendText($"{NG_cnt} 下載NG。");
+                Tbx_Info.AppendText($"\r\n {NG_cnt} 下載NG。");
             }
             
             Enable_Download_Btns();
@@ -172,45 +194,58 @@ namespace yt_dlper
             Total_cnt = 0;
         }
 
+        private bool Is_YT_Link(string url)
+        {
+            if (url.ToLower().Contains("youtube"))
+            {
+                return true; //youtu.be
+            } 
+            else if (url.ToLower().Contains("youtu.be"))
+            {
+                return true; //youtu.be
+            }
+
+            return false;
+        }
+
         private void Btn_mp4_Click(object sender, EventArgs e)
         {
-            if (Rbn_Unlimited.Checked)
+            Mp3_Parameters = "";
+
+            if (Rbn_Res_Unlimited.Checked == false)
             {
-                Command = "yt-dlp.exe ";
-            }
-            else {
-                Command = "yt-dlp.exe -f bestvideo[height<=";
+                YT_Vid_Parameters = "-f bestvideo[height<=";
 
-                if (Rbn_720P.Checked)
+                if (Rbn_Res_720P.Checked)
                 {
-                    Command += "720";
+                    YT_Vid_Parameters += "720";
                 }
-                else if (Rbn_1080P.Checked)
+                else if (Rbn_Res_1080P.Checked)
                 {
-                    Command += "1080";
+                    YT_Vid_Parameters += "1080";
                 }
-                else if (Rbn_1440P.Checked)
+                else if (Rbn_Res_1440P.Checked)
                 {
-                    Command += "1440";
+                    YT_Vid_Parameters += "1440";
                 }
 
-                Command += "][ext=webm]+bestaudio[ext=webm]/best[ext=mp4]/best ";
+                YT_Vid_Parameters += "][ext=webm]+bestaudio[ext=webm]/best[ext=mp4]/best ";
             }
 
-            if (Cbx_Subs.Checked)
+            if (Cbx_YT_Subs.Checked)
             {
-                Command += " --write-subs ";
+                YT_Vid_Parameters += " --write-subs ";
             }
 
-            
             Whole_download();
         }
 
         private void Btn_mp3_Click(object sender, EventArgs e)
         {
-            Cbx_Subs.Checked = false;
+            Cbx_YT_Subs.Checked = false;
 
-            Command = "yt-dlp.exe --extract-audio -x --audio-format mp3 ";
+            YT_Vid_Parameters = "";
+            Mp3_Parameters = "--extract-audio -x --audio-format mp3 ";
 
             Whole_download();
         }
@@ -236,6 +271,15 @@ namespace yt_dlper
             }
 
             Reset_Cnt();
+        }
+
+        private string File_Version()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fvi.FileVersion;
+
+            return version;
         }
 
         private void Btn_Clear_Link_Click(object sender, EventArgs e)
@@ -325,14 +369,14 @@ namespace yt_dlper
             Disable_Download_Btns();
 
             // make sure there is space between link and command
-            Command = "yt-dlp.exe -U";
+            String Update_Command = "yt-dlp.exe -U";
 
-            Tbx_Info.AppendText($"{Command}\r\n");
+            Tbx_Info.AppendText($"{Update_Command}\r\n");
 
             // 建立 Process 物件並設定相關屬性
             Process process = new Process();
             process.StartInfo.FileName = "powershell.exe";
-            process.StartInfo.Arguments = $"-Command \"{Command}\"";
+            process.StartInfo.Arguments = $"-Command \"{Update_Command}\"";
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
