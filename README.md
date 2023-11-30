@@ -7,7 +7,8 @@ zh_TW
 4. 快速連點兩次下載目錄字串可以開啟該資料夾。
 
 相依性：
-最少需要yt-dlp.exe
+(A).Net Framework 4.5
+(B)最少需要yt-dlp.exe
 
 建議安裝：
 ffmpeg
@@ -20,7 +21,8 @@ en_US
 4. Double click the textbox of download location can open a file explorer to that directory.
 
 Dependency/Mininum Requirement:
-yt-dlp.exe
+(A).Net Framework 4.5
+(B)yt-dlp.exe
 
 Recommanded software:
 ffmpeg
