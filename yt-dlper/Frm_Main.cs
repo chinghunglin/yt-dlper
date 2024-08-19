@@ -234,7 +234,7 @@ namespace yt_dlper
 
             if (Cbx_YT_Subs.Checked)
             {
-                YT_Vid_Parameters += " --write-subs ";
+                YT_Vid_Parameters += " --write-subs --write-auto-sub --sub-lang \"zh-TW,zh-Hant,zh-Hans\"";
             }
 
             Whole_download();

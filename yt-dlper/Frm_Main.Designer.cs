@@ -66,7 +66,7 @@
             // Tbx_Link
             // 
             this.Tbx_Link.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Tbx_Link.Location = new System.Drawing.Point(112, 21);
+            this.Tbx_Link.Location = new System.Drawing.Point(116, 21);
             this.Tbx_Link.Multiline = true;
             this.Tbx_Link.Name = "Tbx_Link";
             this.Tbx_Link.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -76,7 +76,7 @@
             // Tbx_Wrk_Dir
             // 
             this.Tbx_Wrk_Dir.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Tbx_Wrk_Dir.Location = new System.Drawing.Point(112, 121);
+            this.Tbx_Wrk_Dir.Location = new System.Drawing.Point(116, 121);
             this.Tbx_Wrk_Dir.Name = "Tbx_Wrk_Dir";
             this.Tbx_Wrk_Dir.ReadOnly = true;
             this.Tbx_Wrk_Dir.Size = new System.Drawing.Size(500, 29);
@@ -89,9 +89,9 @@
             this.Btn_Wrk_Dir.Location = new System.Drawing.Point(4, 120);
             this.Btn_Wrk_Dir.Margin = new System.Windows.Forms.Padding(0);
             this.Btn_Wrk_Dir.Name = "Btn_Wrk_Dir";
-            this.Btn_Wrk_Dir.Size = new System.Drawing.Size(106, 30);
+            this.Btn_Wrk_Dir.Size = new System.Drawing.Size(110, 30);
             this.Btn_Wrk_Dir.TabIndex = 18;
-            this.Btn_Wrk_Dir.Text = "下載到(To):";
+            this.Btn_Wrk_Dir.Text = "目錄 Save to";
             this.Btn_Wrk_Dir.UseVisualStyleBackColor = true;
             this.Btn_Wrk_Dir.Click += new System.EventHandler(this.Btn_Wrk_Dir_Click);
             // 
@@ -99,10 +99,11 @@
             // 
             this.Btn_mp4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
             this.Btn_mp4.Location = new System.Drawing.Point(402, 173);
+            this.Btn_mp4.Margin = new System.Windows.Forms.Padding(0);
             this.Btn_mp4.Name = "Btn_mp4";
-            this.Btn_mp4.Size = new System.Drawing.Size(97, 36);
+            this.Btn_mp4.Size = new System.Drawing.Size(100, 36);
             this.Btn_mp4.TabIndex = 19;
-            this.Btn_mp4.Text = "下載 MP4";
+            this.Btn_mp4.Text = "下載 Video";
             this.Btn_mp4.UseVisualStyleBackColor = true;
             this.Btn_mp4.Click += new System.EventHandler(this.Btn_mp4_Click);
             // 
