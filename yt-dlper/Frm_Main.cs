@@ -31,18 +31,20 @@ namespace yt_dlper
         private string Exe_Name = "yt-dlp.exe ";
         private string YT_Vid_Parameters = "";
         private string Mp3_Parameters = "";
+        private const string Sub_Parameters = " --write-subs --write-auto-sub --sub-lang "
+                                            + "\"zh-TW,zh-CN,zh-Hant,zh-Hans,zh-Hant-zh-CN,zh-Hans-zh-CN\" ";
         private int Total_cnt = 0;
         private int OK_cnt = 0;
         private int NG_cnt = 0;
 
         private void Btn_Wrk_Dir_Click(object sender, EventArgs e)
         {
-            if(FolderBrowserDialog1.ShowDialog() == DialogResult.OK) {
+            if (FolderBrowserDialog1.ShowDialog() == DialogResult.OK) {
                 Wrk_Dir = FolderBrowserDialog1.SelectedPath;
 
                 Tbx_Wrk_Dir.Text = Wrk_Dir;
             }
-            
+
         }
 
         private void Frm_Main_Load(object sender, EventArgs e)
@@ -90,10 +92,16 @@ namespace yt_dlper
         }
 
         private bool Link_NG(string link)
-        { 
-            if (link.Length == 0 )
+        {
+            if (link.Length == 0)
             {
                 return true;
+            }
+
+            if (link.Length == 11)
+            {
+                // trying with https://www.youtube.com/watch?v=LEN_11_String
+                return false;
             }
 
             if (!link.ToLower().Contains("http"))
@@ -104,6 +112,10 @@ namespace yt_dlper
             return false;
         }
 
+        private string AutoCompleteToYTLink(string link)
+        {
+            return "https://www.youtube.com/watch?v=" + link;
+        }
 
         private void Single_Download(string link)
         {
@@ -117,6 +129,11 @@ namespace yt_dlper
                 return;
             }
 
+            if (link.Length == 11)
+            {
+                link = AutoCompleteToYTLink(link);
+            }
+
             Tbx_Info.AppendText($"開始嘗試下載第{Total_cnt}個連結\r\n" + 
                     $"Start trying download No.{Total_cnt} link...\r\n");
             Tbx_Info.Refresh();
@@ -125,7 +142,11 @@ namespace yt_dlper
     
             if (Is_YT_Link(link))
             {
-                Full_Command = $"{Exe_Name} {YT_Vid_Parameters} {Mp3_Parameters}";
+                Full_Command = $"{Exe_Name} {YT_Vid_Parameters} {Mp3_Parameters} ";
+
+                if (Cbx_YT_Subs.Checked) {
+                    Full_Command += $" {Sub_Parameters} ";
+                }
             }
             else 
             {
@@ -208,6 +229,14 @@ namespace yt_dlper
             return false;
         }
 
+        private void Btn_SubOnly_Click(object sender, EventArgs e)
+        {
+            Mp3_Parameters = "";
+            Cbx_YT_Subs.Checked = true;
+            YT_Vid_Parameters = " --skip-download ";
+            Whole_download();
+        }
+
         private void Btn_mp4_Click(object sender, EventArgs e)
         {
             Mp3_Parameters = "";
@@ -232,11 +261,11 @@ namespace yt_dlper
                 YT_Vid_Parameters += "][ext=webm]+bestaudio[ext=webm]/best[ext=mp4]/best ";
             }
 
-            if (Cbx_YT_Subs.Checked)
-            {
-                YT_Vid_Parameters += " --write-subs --write-auto-sub --sub-lang " 
-                    + "\"zh-TW,zh-CN,zh-Hant,zh-Hans,zh-Hant-zh-CN,zh-Hans-zh-CN\"";
-            }
+            //if (Cbx_YT_Subs.Checked)
+            //{
+            //    YT_Vid_Parameters += " --write-subs --write-auto-sub --sub-lang " 
+            //        + "\"zh-TW,zh-CN,zh-Hant,zh-Hans,zh-Hant-zh-CN,zh-Hans-zh-CN\" ";
+            //}
 
             Whole_download();
         }
@@ -328,9 +357,7 @@ namespace yt_dlper
                 return "mp3下載已完成。Download completed.";
             }
 
-            // for facebook
-            if (str_to_check.Contains("facebook") 
-                && str_to_check.Contains("100%"))
+            if (str_to_check.Contains("100%"))
             {
                 OK_cnt++;
                 return "影片下載已完成。Download completed.";

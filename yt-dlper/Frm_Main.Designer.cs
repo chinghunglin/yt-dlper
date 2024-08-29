@@ -49,6 +49,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.Btn_Update_yt_dlp = new System.Windows.Forms.Button();
             this.Tbx_Info = new System.Windows.Forms.RichTextBox();
+            this.Btn_SubOnly = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +71,7 @@
             this.Tbx_Link.Multiline = true;
             this.Tbx_Link.Name = "Tbx_Link";
             this.Tbx_Link.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Tbx_Link.Size = new System.Drawing.Size(437, 88);
+            this.Tbx_Link.Size = new System.Drawing.Size(493, 88);
             this.Tbx_Link.TabIndex = 1;
             // 
             // Tbx_Wrk_Dir
@@ -79,7 +80,7 @@
             this.Tbx_Wrk_Dir.Location = new System.Drawing.Point(116, 121);
             this.Tbx_Wrk_Dir.Name = "Tbx_Wrk_Dir";
             this.Tbx_Wrk_Dir.ReadOnly = true;
-            this.Tbx_Wrk_Dir.Size = new System.Drawing.Size(500, 29);
+            this.Tbx_Wrk_Dir.Size = new System.Drawing.Size(556, 29);
             this.Tbx_Wrk_Dir.TabIndex = 17;
             this.Tbx_Wrk_Dir.DoubleClick += new System.EventHandler(this.Tbx_Wrk_Dir_DoubleClick);
             // 
@@ -98,10 +99,10 @@
             // Btn_mp4
             // 
             this.Btn_mp4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_mp4.Location = new System.Drawing.Point(402, 173);
+            this.Btn_mp4.Location = new System.Drawing.Point(398, 173);
             this.Btn_mp4.Margin = new System.Windows.Forms.Padding(0);
             this.Btn_mp4.Name = "Btn_mp4";
-            this.Btn_mp4.Size = new System.Drawing.Size(100, 36);
+            this.Btn_mp4.Size = new System.Drawing.Size(98, 36);
             this.Btn_mp4.TabIndex = 19;
             this.Btn_mp4.Text = "下載 Video";
             this.Btn_mp4.UseVisualStyleBackColor = true;
@@ -110,7 +111,7 @@
             // Btn_mp3
             // 
             this.Btn_mp3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_mp3.Location = new System.Drawing.Point(508, 173);
+            this.Btn_mp3.Location = new System.Drawing.Point(496, 173);
             this.Btn_mp3.Name = "Btn_mp3";
             this.Btn_mp3.Size = new System.Drawing.Size(104, 36);
             this.Btn_mp3.TabIndex = 20;
@@ -121,7 +122,7 @@
             // Btn_Clear_Link
             // 
             this.Btn_Clear_Link.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_Clear_Link.Location = new System.Drawing.Point(555, 40);
+            this.Btn_Clear_Link.Location = new System.Drawing.Point(615, 40);
             this.Btn_Clear_Link.Name = "Btn_Clear_Link";
             this.Btn_Clear_Link.Size = new System.Drawing.Size(57, 51);
             this.Btn_Clear_Link.TabIndex = 22;
@@ -226,7 +227,7 @@
             // 
             // Btn_Update_yt_dlp
             // 
-            this.Btn_Update_yt_dlp.Location = new System.Drawing.Point(484, 437);
+            this.Btn_Update_yt_dlp.Location = new System.Drawing.Point(551, 437);
             this.Btn_Update_yt_dlp.Name = "Btn_Update_yt_dlp";
             this.Btn_Update_yt_dlp.Size = new System.Drawing.Size(128, 23);
             this.Btn_Update_yt_dlp.TabIndex = 27;
@@ -240,16 +241,28 @@
             this.Tbx_Info.Location = new System.Drawing.Point(8, 231);
             this.Tbx_Info.Name = "Tbx_Info";
             this.Tbx_Info.ReadOnly = true;
-            this.Tbx_Info.Size = new System.Drawing.Size(600, 200);
+            this.Tbx_Info.Size = new System.Drawing.Size(671, 200);
             this.Tbx_Info.TabIndex = 28;
             this.Tbx_Info.Text = "";
+            // 
+            // Btn_SubOnly
+            // 
+            this.Btn_SubOnly.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.Btn_SubOnly.Location = new System.Drawing.Point(600, 167);
+            this.Btn_SubOnly.Name = "Btn_SubOnly";
+            this.Btn_SubOnly.Size = new System.Drawing.Size(83, 51);
+            this.Btn_SubOnly.TabIndex = 29;
+            this.Btn_SubOnly.Text = "下載字幕 SubOnly";
+            this.Btn_SubOnly.UseVisualStyleBackColor = true;
+            this.Btn_SubOnly.Click += new System.EventHandler(this.Btn_SubOnly_Click);
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGreen;
-            this.ClientSize = new System.Drawing.Size(619, 461);
+            this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.Btn_SubOnly);
             this.Controls.Add(this.Tbx_Info);
             this.Controls.Add(this.Btn_Update_yt_dlp);
             this.Controls.Add(this.linkLabel1);
@@ -263,8 +276,8 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(635, 500);
-            this.MinimumSize = new System.Drawing.Size(635, 500);
+            this.MaximumSize = new System.Drawing.Size(700, 500);
+            this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "Frm_Main";
             this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
@@ -297,6 +310,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button Btn_Update_yt_dlp;
         private System.Windows.Forms.RichTextBox Tbx_Info;
+        internal System.Windows.Forms.Button Btn_SubOnly;
     }
 }
 
