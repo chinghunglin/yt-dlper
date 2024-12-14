@@ -86,7 +86,7 @@ namespace yt_dlper
             {
                 MessageBox.Show("yt-dlp.exe 不存在 isn't existed!");
 
-                Btn_mp4.Enabled = false;
+                Btn_Video.Enabled = false;
                 Btn_mp3.Enabled = false;
             }
         }
@@ -237,11 +237,15 @@ namespace yt_dlper
             Whole_download();
         }
 
-        private void Btn_mp4_Click(object sender, EventArgs e)
+        private void Btn_Video_Click(object sender, EventArgs e)
         {
             Mp3_Parameters = "";
 
-            if (Rbn_Res_Unlimited.Checked == false)
+            if (Rbn_Res_Unlimited.Checked != false)
+            {
+                YT_Vid_Parameters = "";
+            }
+            else
             {
                 YT_Vid_Parameters = "-f bestvideo[height<=";
 
@@ -261,11 +265,6 @@ namespace yt_dlper
                 YT_Vid_Parameters += "][ext=webm]+bestaudio[ext=webm]/best[ext=mp4]/best ";
             }
 
-            //if (Cbx_YT_Subs.Checked)
-            //{
-            //    YT_Vid_Parameters += " --write-subs --write-auto-sub --sub-lang " 
-            //        + "\"zh-TW,zh-CN,zh-Hant,zh-Hans,zh-Hant-zh-CN,zh-Hans-zh-CN\" ";
-            //}
 
             Whole_download();
         }
@@ -325,13 +324,13 @@ namespace yt_dlper
 
         private void Disable_Download_Btns()
         { 
-            Btn_mp4.Enabled = false;
+            Btn_Video.Enabled = false;
             Btn_mp3.Enabled = false;
         }
 
         private void Enable_Download_Btns()
         {
-            Btn_mp4.Enabled = true;
+            Btn_Video.Enabled = true;
             Btn_mp3.Enabled = true;
         }
 

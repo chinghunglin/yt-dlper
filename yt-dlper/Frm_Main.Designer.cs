@@ -35,7 +35,7 @@
             this.Tbx_Wrk_Dir = new System.Windows.Forms.TextBox();
             this.Btn_Wrk_Dir = new System.Windows.Forms.Button();
             this.FolderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.Btn_mp4 = new System.Windows.Forms.Button();
+            this.Btn_Video = new System.Windows.Forms.Button();
             this.Btn_mp3 = new System.Windows.Forms.Button();
             this.Btn_Clear_Link = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -96,17 +96,17 @@
             this.Btn_Wrk_Dir.UseVisualStyleBackColor = true;
             this.Btn_Wrk_Dir.Click += new System.EventHandler(this.Btn_Wrk_Dir_Click);
             // 
-            // Btn_mp4
+            // Btn_Video
             // 
-            this.Btn_mp4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_mp4.Location = new System.Drawing.Point(398, 173);
-            this.Btn_mp4.Margin = new System.Windows.Forms.Padding(0);
-            this.Btn_mp4.Name = "Btn_mp4";
-            this.Btn_mp4.Size = new System.Drawing.Size(98, 36);
-            this.Btn_mp4.TabIndex = 19;
-            this.Btn_mp4.Text = "下載 Video";
-            this.Btn_mp4.UseVisualStyleBackColor = true;
-            this.Btn_mp4.Click += new System.EventHandler(this.Btn_mp4_Click);
+            this.Btn_Video.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.Btn_Video.Location = new System.Drawing.Point(398, 173);
+            this.Btn_Video.Margin = new System.Windows.Forms.Padding(0);
+            this.Btn_Video.Name = "Btn_Video";
+            this.Btn_Video.Size = new System.Drawing.Size(98, 36);
+            this.Btn_Video.TabIndex = 19;
+            this.Btn_Video.Text = "下載 Video";
+            this.Btn_Video.UseVisualStyleBackColor = true;
+            this.Btn_Video.Click += new System.EventHandler(this.Btn_Video_Click);
             // 
             // Btn_mp3
             // 
@@ -267,7 +267,7 @@
             this.Controls.Add(this.Btn_Update_yt_dlp);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Btn_mp4);
+            this.Controls.Add(this.Btn_Video);
             this.Controls.Add(this.Btn_Clear_Link);
             this.Controls.Add(this.Btn_mp3);
             this.Controls.Add(this.Btn_Wrk_Dir);
@@ -296,7 +296,7 @@
         internal System.Windows.Forms.TextBox Tbx_Wrk_Dir;
         internal System.Windows.Forms.Button Btn_Wrk_Dir;
         internal System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog1;
-        internal System.Windows.Forms.Button Btn_mp4;
+        internal System.Windows.Forms.Button Btn_Video;
         internal System.Windows.Forms.Button Btn_mp3;
         internal System.Windows.Forms.Button Btn_Clear_Link;
         private System.Windows.Forms.Timer timer1;
