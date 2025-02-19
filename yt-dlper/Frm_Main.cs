@@ -32,7 +32,7 @@ namespace yt_dlper
         private string YT_Vid_Parameters = "";
         private string Mp3_Parameters = "";
         private const string Sub_Parameters = " --write-subs --write-auto-sub --sub-lang "
-                                            + "\"zh-TW,zh-CN,zh-Hant,zh-Hans,zh-Hant-zh-CN,zh-Hans-zh-CN\" ";
+                                            + "\"zh,zh-TW,zh-CN,zh-Hant,zh-Hans,zh-Hant-zh-CN,zh-Hans-zh-CN\" ";
         private int Total_cnt = 0;
         private int OK_cnt = 0;
         private int NG_cnt = 0;
