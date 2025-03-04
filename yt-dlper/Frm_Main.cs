@@ -1,20 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
-using System.Globalization;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Security.Policy;
-using static System.Windows.Forms.LinkLabel;
-using static System.Net.Mime.MediaTypeNames;
 using System.Reflection;
 
 namespace yt_dlper
@@ -27,7 +17,6 @@ namespace yt_dlper
         }
 
         public string Wrk_Dir { get; private set; }
-        private string Command = "";
         private string Exe_Name = "yt-dlp.exe ";
         private string YT_Vid_Parameters = "";
         private string Mp3_Parameters = "";
@@ -39,12 +28,14 @@ namespace yt_dlper
 
         private void Btn_Wrk_Dir_Click(object sender, EventArgs e)
         {
-            if (FolderBrowserDialog1.ShowDialog() == DialogResult.OK) {
-                Wrk_Dir = FolderBrowserDialog1.SelectedPath;
-
-                Tbx_Wrk_Dir.Text = Wrk_Dir;
+            if (FolderBrowserDialog1.ShowDialog() != DialogResult.OK)
+            {
+                return;
             }
 
+            Wrk_Dir = FolderBrowserDialog1.SelectedPath;
+
+            Tbx_Wrk_Dir.Text = Wrk_Dir;
         }
 
         private void Frm_Main_Load(object sender, EventArgs e)
@@ -72,7 +63,6 @@ namespace yt_dlper
             var dupl = Process.GetProcessesByName(process.ProcessName);
 
             if (dupl.Length > 1) {
-                //MessageBox.Show($"{process.ProcessName} have {dupl.Length} processes!!!");
                 return true;
             }
 
@@ -165,7 +155,6 @@ namespace yt_dlper
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
-            //process.StartInfo.StandardOutputEncoding = Encoding.UTF8;
             
             // 清空 StandardOutput
             process.OutputDataReceived += (sender, e) => { };
@@ -188,7 +177,6 @@ namespace yt_dlper
 
             // 顯示powershell執行過程
             Tbx_Info.AppendText(output);
-            //Tbx_Info.AppendText(string.Format("N'{0}'", output));
 
             // 分析執行結果
             Tbx_Info.AppendText(Analysis_Download_Result(output) + "\r\n");
@@ -241,7 +229,7 @@ namespace yt_dlper
         {
             Mp3_Parameters = "";
 
-            if (Rbn_Res_Unlimited.Checked != false)
+            if (Rbn_Res_Unlimited.Checked)
             {
                 YT_Vid_Parameters = "";
             }
@@ -265,7 +253,6 @@ namespace yt_dlper
                 YT_Vid_Parameters += "][ext=webm]+bestaudio[ext=webm]/best[ext=mp4]/best ";
             }
 
-
             Whole_download();
         }
 
@@ -281,15 +268,12 @@ namespace yt_dlper
 
         private void Whole_download()
         {
-            string[] links = Tbx_Link.Lines;
+            Preaction();
+
+            string[] links = RemoveEmptyLines(Tbx_Link.Lines);
 
             foreach (string link in links)
             {
-                if(link.Trim().Length == 0)
-                {
-                    continue;
-                }
-
                 // 使用&作為分隔符號將字串拆分成子字串，藉此去除掉從&開始的字元
                 string[] substrings = link.Split('&');
 
@@ -300,6 +284,19 @@ namespace yt_dlper
             }
 
             Reset_Cnt();
+        }
+
+        private static string[] RemoveEmptyLines(string[] inputArray)
+        {
+            return inputArray
+                .Where(line => !string.IsNullOrWhiteSpace(line))
+                .ToArray();
+        }
+
+        // Minimize window or something else
+        private void Preaction()
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private string File_Version()
@@ -423,7 +420,6 @@ namespace yt_dlper
             MessageBox.Show(output);
 
             // 顯示powershell執行過程
-            //Tbx_Info.AppendText(output);
             Tbx_Info.AppendText(string.Format("N'{0}'", output));
 
             Enable_Download_Btns();
