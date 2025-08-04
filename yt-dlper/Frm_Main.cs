@@ -268,9 +268,11 @@ namespace yt_dlper
         {
             Tbx_Link.Text = string.Empty;
             Tbx_Info.Text = string.Empty;
+            Tbx_Progress.Text = string.Empty;
 
             Tbx_Link.Refresh();
             Tbx_Info.Refresh();
+            Tbx_Progress.Refresh();
 
             Reset_Cnt();
         }
