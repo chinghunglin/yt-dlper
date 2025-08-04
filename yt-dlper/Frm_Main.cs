@@ -134,7 +134,7 @@ namespace yt_dlper
             {
                 Tbx_Info.AppendText($"開始嘗試下載第{Total_cnt}個連結\r\n" +
                                     $"Start trying download No.{Total_cnt} link...\r\n");
-                ScrollToCaret(Tbx_Info);
+                ScrollToCaret(this.Tbx_Info);
             });
 
             return ExecuteDownloadAsync(link);
@@ -248,7 +248,7 @@ namespace yt_dlper
         // Minimize window or something else
         private void Preaction()
         {
-            this.WindowState = FormWindowState.Minimized;
+            //this.WindowState = FormWindowState.Minimized;
         }
 
         private string File_Version()
@@ -430,7 +430,7 @@ namespace yt_dlper
             this.Invoke((MethodInvoker)delegate
             {
                 Tbx_Info.AppendText($"{fullCommand}\r\n");
-                ScrollToCaret(Tbx_Info);
+                ScrollToCaret(this.Tbx_Info);
             });
 
             var process = new Process
@@ -459,7 +459,7 @@ namespace yt_dlper
                     this.Invoke((MethodInvoker)delegate
                     {
                         Tbx_Info.AppendText(e.Data + "\r\n");
-                        ScrollToCaret(Tbx_Info);
+                        ScrollToCaret(this.Tbx_Info);
                     });
                 }
             };
@@ -472,7 +472,7 @@ namespace yt_dlper
                     this.Invoke((MethodInvoker)delegate
                     {
                         Tbx_Info.AppendText("ERROR: " + e.Data + "\r\n");
-                        ScrollToCaret(Tbx_Info);
+                        ScrollToCaret(this.Tbx_Info);
                     });
                 }
             };
@@ -488,7 +488,7 @@ namespace yt_dlper
                     {
                         Tbx_Info.AppendText($"{NG_cnt} 下载NG.\r\n");
                     }
-                    ScrollToCaret(Tbx_Info);
+                    ScrollToCaret(this.Tbx_Info);
                 });
                 tcs.SetResult(true);
                 process.Dispose();
@@ -501,7 +501,7 @@ namespace yt_dlper
             return tcs.Task;
         }
 
-        private void ScrollToCaret(TextBox tb)
+        private void ScrollToCaret(RichTextBox tb)
         {
             tb.SelectionStart = tb.Text.Length;
             tb.ScrollToCaret();

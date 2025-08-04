@@ -113,6 +113,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.dll" />
+    <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.Shell.dll" />
     <Content Include="yt-dlper.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -122,5 +124,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
