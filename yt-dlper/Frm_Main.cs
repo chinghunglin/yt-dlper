@@ -226,15 +226,19 @@ namespace yt_dlper
                     string[] substrings = link.Split('&');
 
                     Total_cnt++;
+                    Tbx_Progress.Text = $"[{Total_cnt}/{links.Length}] {substrings[0]}";
                     await Single_Download(substrings[0]);
 
                     await Task.Delay(500); // Replaces Thread.Sleep
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"下載過程中發生錯誤: {ex.Message}\r\n{ex.StackTrace}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             finally
             {
                 Enable_Download_Btns();
-                Reset_Cnt();
             }
         }
 
@@ -450,12 +454,16 @@ namespace yt_dlper
             };
 
             var outputBuilder = new StringBuilder();
+            var syncLock = new object();
 
             process.OutputDataReceived += (sender, e) =>
             {
                 if (e.Data != null)
                 {
-                    outputBuilder.AppendLine(e.Data);
+                    lock (syncLock)
+                    {
+                        outputBuilder.AppendLine(e.Data);
+                    }
                     this.Invoke((MethodInvoker)delegate
                     {
                         Tbx_Info.AppendText(e.Data + "\r\n");
@@ -468,7 +476,10 @@ namespace yt_dlper
             {
                 if (e.Data != null)
                 {
-                    outputBuilder.AppendLine(e.Data);
+                    lock (syncLock)
+                    {
+                        outputBuilder.AppendLine(e.Data);
+                    }
                     this.Invoke((MethodInvoker)delegate
                     {
                         Tbx_Info.AppendText("ERROR: " + e.Data + "\r\n");
@@ -481,7 +492,11 @@ namespace yt_dlper
             {
                 this.Invoke((MethodInvoker)delegate
                 {
-                    string finalOutput = outputBuilder.ToString();
+                    string finalOutput;
+                    lock (syncLock)
+                    {
+                        finalOutput = outputBuilder.ToString();
+                    }
                     Tbx_Info.AppendText(Analysis_Download_Result(finalOutput) + "\r\n");
                     Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下载OK.\r\n");
                     if (NG_cnt > 0)

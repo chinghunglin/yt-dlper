@@ -49,6 +49,8 @@
             this.Btn_Update_yt_dlp = new System.Windows.Forms.Button();
             this.Tbx_Info = new System.Windows.Forms.RichTextBox();
             this.Btn_SubOnly = new System.Windows.Forms.Button();
+            this.Tbx_Progress = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +73,7 @@
             this.Tbx_Link.Multiline = true;
             this.Tbx_Link.Name = "Tbx_Link";
             this.Tbx_Link.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Tbx_Link.Size = new System.Drawing.Size(556, 109);
+            this.Tbx_Link.Size = new System.Drawing.Size(656, 109);
             this.Tbx_Link.TabIndex = 0;
             // 
             // Tbx_Wrk_Dir
@@ -80,7 +82,7 @@
             this.Tbx_Wrk_Dir.Location = new System.Drawing.Point(116, 121);
             this.Tbx_Wrk_Dir.Name = "Tbx_Wrk_Dir";
             this.Tbx_Wrk_Dir.ReadOnly = true;
-            this.Tbx_Wrk_Dir.Size = new System.Drawing.Size(556, 29);
+            this.Tbx_Wrk_Dir.Size = new System.Drawing.Size(656, 29);
             this.Tbx_Wrk_Dir.TabIndex = 17;
             this.Tbx_Wrk_Dir.DoubleClick += new System.EventHandler(this.Tbx_Wrk_Dir_DoubleClick);
             // 
@@ -227,7 +229,7 @@
             // 
             // Btn_Update_yt_dlp
             // 
-            this.Btn_Update_yt_dlp.Location = new System.Drawing.Point(551, 437);
+            this.Btn_Update_yt_dlp.Location = new System.Drawing.Point(644, 437);
             this.Btn_Update_yt_dlp.Name = "Btn_Update_yt_dlp";
             this.Btn_Update_yt_dlp.Size = new System.Drawing.Size(128, 23);
             this.Btn_Update_yt_dlp.TabIndex = 27;
@@ -241,7 +243,7 @@
             this.Tbx_Info.Location = new System.Drawing.Point(8, 231);
             this.Tbx_Info.Name = "Tbx_Info";
             this.Tbx_Info.ReadOnly = true;
-            this.Tbx_Info.Size = new System.Drawing.Size(671, 200);
+            this.Tbx_Info.Size = new System.Drawing.Size(764, 200);
             this.Tbx_Info.TabIndex = 28;
             this.Tbx_Info.Text = "";
             // 
@@ -256,12 +258,33 @@
             this.Btn_SubOnly.UseVisualStyleBackColor = true;
             this.Btn_SubOnly.Click += new System.EventHandler(this.Btn_SubOnly_Click);
             // 
+            // Tbx_Progress
+            // 
+            this.Tbx_Progress.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.Tbx_Progress.Location = new System.Drawing.Point(116, 470);
+            this.Tbx_Progress.Name = "Tbx_Progress";
+            this.Tbx_Progress.ReadOnly = true;
+            this.Tbx_Progress.Size = new System.Drawing.Size(656, 29);
+            this.Tbx_Progress.TabIndex = 30;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(17, 462);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 42);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "進度Progress:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGreen;
-            this.ClientSize = new System.Drawing.Size(684, 461);
+            this.ClientSize = new System.Drawing.Size(784, 511);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Tbx_Progress);
             this.Controls.Add(this.Btn_SubOnly);
             this.Controls.Add(this.Tbx_Info);
             this.Controls.Add(this.Btn_Update_yt_dlp);
@@ -276,8 +299,8 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(700, 500);
-            this.MinimumSize = new System.Drawing.Size(700, 500);
+            this.MaximumSize = new System.Drawing.Size(800, 550);
+            this.MinimumSize = new System.Drawing.Size(800, 550);
             this.Name = "Frm_Main";
             this.Text = "簡易影片/音樂下載器 Simple yt-dlp GUI By CHL v";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
@@ -311,6 +334,8 @@
         private System.Windows.Forms.Button Btn_Update_yt_dlp;
         private System.Windows.Forms.RichTextBox Tbx_Info;
         internal System.Windows.Forms.Button Btn_SubOnly;
+        internal System.Windows.Forms.TextBox Tbx_Progress;
+        private System.Windows.Forms.Label label2;
     }
 }
 
