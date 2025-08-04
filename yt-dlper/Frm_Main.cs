@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Text;
 using System.Reflection;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -115,16 +117,12 @@ namespace yt_dlper
             return "https://www.youtube.com/watch?v=" + link;
         }
 
-        private void Single_Download(string link)
+        private Task Single_Download(string link)
         {
-            String Full_Command = string.Empty;
-
-            Tbx_Info.Text = string.Empty;
-
             if (Link_NG(link))
             {
-                MessageBox.Show($"{link}下載連結無效 Download link is invalid.");
-                return;
+                MessageBox.Show($"{link} 下載連結無效 Download link is invalid.");
+                return Task.CompletedTask;
             }
 
             if (link.Length == 11)
@@ -132,76 +130,14 @@ namespace yt_dlper
                 link = AutoCompleteToYTLink(link);
             }
 
-            Tbx_Info.AppendText($"開始嘗試下載第{Total_cnt}個連結\r\n" +
-                    $"Start trying download No.{Total_cnt} link...\r\n");
-            Tbx_Info.Refresh();
-            Disable_Download_Btns();
-
-    
-            if (Is_YT_Link(link))
+            this.Invoke((MethodInvoker)delegate
             {
-                Full_Command = $"{Exe_Name} {YT_Vid_Parameters} {Mp3_Parameters} ";
+                Tbx_Info.AppendText($"開始嘗試下載第{Total_cnt}個連結\r\n" +
+                                    $"Start trying download No.{Total_cnt} link...\r\n");
+                ScrollToCaret(Tbx_Info);
+            });
 
-                if (Cbx_YT_Subs.Checked) {
-                    Full_Command += $" {Sub_Parameters} ";
-                }
-            }
-            else 
-            {
-                Full_Command = $"{Exe_Name} {Mp3_Parameters}";
-            }
-
-            // add the download Path parameter and link
-            Full_Command += $" -P \'{Wrk_Dir}\'  {link.Trim()}";
-
-            Tbx_Info.AppendText($"{Full_Command}\r\n");
-
-            // 建立 Process 物件並設定相關屬性
-            Process process = new Process();
-            process.StartInfo.FileName = "powershell.exe";
-            process.StartInfo.Arguments = $"-Command \"{Full_Command}\"";
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
-            
-            // 清空 StandardOutput
-            process.OutputDataReceived += (sender, e) => { };
-
-            // 開始執行 PowerShell
-            process.Start();
-
-            // 讀取輸出
-            string output = string.Empty;
-            output = process.StandardOutput.ReadToEnd();
-
-            // 等待 PowerShell 執行完畢
-            process.WaitForExit();
-
-            // 清除 StandardOutput
-            process.StandardOutput.ReadToEnd();
-
-            // 將換行符號轉換為 TextBox 所需的換行格式
-            output = output.Replace("\n", "\r\n");
-
-            // 顯示powershell執行過程
-            Tbx_Info.AppendText(output);
-
-            // 分析執行結果
-            Tbx_Info.AppendText(Analysis_Download_Result(output) + "\r\n");
-
-            Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下載OK.");
-
-            Tbx_Info.SelectionLength = 0;
-            Tbx_Info.SelectionStart = Tbx_Info.Text.Length;
-            Tbx_Info.Focus();
-            Tbx_Info.ScrollToCaret();
-
-            if (NG_cnt > 0)
-            {
-                Tbx_Info.AppendText($"\r\n {NG_cnt} 下載NG.");
-            }
-            
-            Enable_Download_Btns();
+            return ExecuteDownloadAsync(link);
         }
 
         private void Reset_Cnt()
@@ -225,15 +161,15 @@ namespace yt_dlper
             return false;
         }
 
-        private void Btn_SubOnly_Click(object sender, EventArgs e)
+        private async void Btn_SubOnly_Click(object sender, EventArgs e)
         {
             Mp3_Parameters = "";
             Cbx_YT_Subs.Checked = true;
             YT_Vid_Parameters = " --skip-download ";
-            Whole_download();
+            await Whole_download();
         }
 
-        private void Btn_Video_Click(object sender, EventArgs e)
+        private async void Btn_Video_Click(object sender, EventArgs e)
         {
             Mp3_Parameters = "";
 
@@ -261,37 +197,45 @@ namespace yt_dlper
                 YT_Vid_Parameters += "][ext=webm]+bestaudio[ext=webm]/best[ext=mp4]/best ";
             }
 
-            Whole_download();
+            await Whole_download();
         }
 
-        private void Btn_mp3_Click(object sender, EventArgs e)
+        private async void Btn_mp3_Click(object sender, EventArgs e)
         {
             Cbx_YT_Subs.Checked = false;
 
             YT_Vid_Parameters = "";
             Mp3_Parameters = "--extract-audio -x --audio-format mp3 ";
 
-            Whole_download();
+            await Whole_download();
         }
 
-        private void Whole_download()
+        private async Task Whole_download()
         {
             Preaction();
+            Disable_Download_Btns();
 
             string[] links = RemoveEmptyLines(Tbx_Link.Lines);
-
-            foreach (string link in links)
-            {
-                // 使用&作為分隔符號將字串拆分成子字串，藉此去除掉從&開始的字元
-                string[] substrings = link.Split('&');
-
-                Total_cnt++;
-                Single_Download(substrings[0]);
-
-                Thread.Sleep(500);
-            }
-
             Reset_Cnt();
+
+            try
+            {
+                foreach (string link in links)
+                {
+                    // 使用&作為分隔符號將字串拆分成子字串，藉此去除掉從&開始的字元
+                    string[] substrings = link.Split('&');
+
+                    Total_cnt++;
+                    await Single_Download(substrings[0]);
+
+                    await Task.Delay(500); // Replaces Thread.Sleep
+                }
+            }
+            finally
+            {
+                Enable_Download_Btns();
+                Reset_Cnt();
+            }
         }
 
         private static string[] RemoveEmptyLines(string[] inputArray)
@@ -462,6 +406,105 @@ namespace yt_dlper
                 }
             }
             return base.ProcessCmdKey(ref msg, keyData); // 其他按鍵交給基底類別處理
+        }
+
+        private Task ExecuteDownloadAsync(string link)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+
+            string fullCommand;
+            if (Is_YT_Link(link))
+            {
+                fullCommand = $"{Exe_Name} {YT_Vid_Parameters} {Mp3_Parameters} ";
+                if (Cbx_YT_Subs.Checked)
+                {
+                    fullCommand += $" {Sub_Parameters} ";
+                }
+            }
+            else
+            {
+                fullCommand = $"{Exe_Name} {Mp3_Parameters}";
+            }
+            fullCommand += $" -P \"{Wrk_Dir}\"  {link.Trim()}";
+
+            this.Invoke((MethodInvoker)delegate
+            {
+                Tbx_Info.AppendText($"{fullCommand}\r\n");
+                ScrollToCaret(Tbx_Info);
+            });
+
+            var process = new Process
+            {
+                StartInfo =
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-Command \"{fullCommand}\"",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    StandardOutputEncoding = Encoding.UTF8,
+                    StandardErrorEncoding = Encoding.UTF8
+                },
+                EnableRaisingEvents = true
+            };
+
+            var outputBuilder = new StringBuilder();
+
+            process.OutputDataReceived += (sender, e) =>
+            {
+                if (e.Data != null)
+                {
+                    outputBuilder.AppendLine(e.Data);
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        Tbx_Info.AppendText(e.Data + "\r\n");
+                        ScrollToCaret(Tbx_Info);
+                    });
+                }
+            };
+
+            process.ErrorDataReceived += (sender, e) =>
+            {
+                if (e.Data != null)
+                {
+                    outputBuilder.AppendLine(e.Data);
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        Tbx_Info.AppendText("ERROR: " + e.Data + "\r\n");
+                        ScrollToCaret(Tbx_Info);
+                    });
+                }
+            };
+
+            process.Exited += (sender, e) =>
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    string finalOutput = outputBuilder.ToString();
+                    Tbx_Info.AppendText(Analysis_Download_Result(finalOutput) + "\r\n");
+                    Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下载OK.\r\n");
+                    if (NG_cnt > 0)
+                    {
+                        Tbx_Info.AppendText($"{NG_cnt} 下载NG.\r\n");
+                    }
+                    ScrollToCaret(Tbx_Info);
+                });
+                tcs.SetResult(true);
+                process.Dispose();
+            };
+
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            return tcs.Task;
+        }
+
+        private void ScrollToCaret(TextBox tb)
+        {
+            tb.SelectionStart = tb.Text.Length;
+            tb.ScrollToCaret();
         }
     }
 }
