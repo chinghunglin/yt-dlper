@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using System.Reflection;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace yt_dlper
 {
@@ -14,6 +15,9 @@ namespace yt_dlper
         public Frm_Main()
         {
             InitializeComponent();
+            this.KeyPreview = true;
+            this.Tbx_Link.DragEnter += new System.Windows.Forms.DragEventHandler(this.Tbx_Link_DragEnter);
+            this.Tbx_Link.DragDrop += new System.Windows.Forms.DragEventHandler(this.Tbx_Link_DragDrop);
         }
 
         public string Wrk_Dir { get; private set; }
@@ -28,14 +32,18 @@ namespace yt_dlper
 
         private void Btn_Wrk_Dir_Click(object sender, EventArgs e)
         {
-            if (FolderBrowserDialog1.ShowDialog() != DialogResult.OK)
+            using (var cofd = new CommonOpenFileDialog())
             {
-                return;
+                cofd.InitialDirectory = Wrk_Dir;
+                cofd.IsFolderPicker = true;
+                cofd.Title = "選擇儲存目錄";
+
+                if (cofd.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    Wrk_Dir = cofd.FileName;
+                    Tbx_Wrk_Dir.Text = Wrk_Dir;
+                }
             }
-
-            Wrk_Dir = FolderBrowserDialog1.SelectedPath;
-
-            Tbx_Wrk_Dir.Text = Wrk_Dir;
         }
 
         private void Frm_Main_Load(object sender, EventArgs e)
@@ -44,7 +52,7 @@ namespace yt_dlper
 
             Tbx_Wrk_Dir.Text = Wrk_Dir;
 
-            FolderBrowserDialog1.SelectedPath = Wrk_Dir;
+            
 
             Check_Requirements();
 
@@ -124,7 +132,7 @@ namespace yt_dlper
                 link = AutoCompleteToYTLink(link);
             }
 
-            Tbx_Info.AppendText($"開始嘗試下載第{Total_cnt}個連結\r\n" + 
+            Tbx_Info.AppendText($"開始嘗試下載第{Total_cnt}個連結\r\n" +
                     $"Start trying download No.{Total_cnt} link...\r\n");
             Tbx_Info.Refresh();
             Disable_Download_Btns();
@@ -181,7 +189,7 @@ namespace yt_dlper
             // 分析執行結果
             Tbx_Info.AppendText(Analysis_Download_Result(output) + "\r\n");
 
-            Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下載OK。");
+            Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下載OK.");
 
             Tbx_Info.SelectionLength = 0;
             Tbx_Info.SelectionStart = Tbx_Info.Text.Length;
@@ -190,7 +198,7 @@ namespace yt_dlper
 
             if (NG_cnt > 0)
             {
-                Tbx_Info.AppendText($"\r\n {NG_cnt} 下載NG。");
+                Tbx_Info.AppendText($"\r\n {NG_cnt} 下載NG.");
             }
             
             Enable_Download_Btns();
@@ -208,7 +216,7 @@ namespace yt_dlper
             if (url.ToLower().Contains("youtube"))
             {
                 return true; //youtu.be
-            } 
+            }
             else if (url.ToLower().Contains("youtu.be"))
             {
                 return true; //youtu.be
@@ -420,9 +428,40 @@ namespace yt_dlper
             MessageBox.Show(output);
 
             // 顯示powershell執行過程
-            Tbx_Info.AppendText(string.Format("N'{0}'", output));
+            Tbx_Info.AppendText(string.Format("N'{{0}}'", output));
 
             Enable_Download_Btns();
+        }
+
+        private void Tbx_Link_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void Tbx_Link_DragDrop(object sender, DragEventArgs e)
+        {
+            string link = (string)e.Data.GetData(DataFormats.Text);
+            Tbx_Link.AppendText(link + Environment.NewLine);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.V))
+            {
+                if (Clipboard.ContainsText())
+                {
+                    Tbx_Link.AppendText(Clipboard.GetText() + Environment.NewLine);
+                    return true; // 表示我們已經處理了這個按鍵
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData); // 其他按鍵交給基底類別處理
         }
     }
 }

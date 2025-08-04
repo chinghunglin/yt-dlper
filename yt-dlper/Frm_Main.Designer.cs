@@ -34,7 +34,6 @@
             this.Tbx_Link = new System.Windows.Forms.TextBox();
             this.Tbx_Wrk_Dir = new System.Windows.Forms.TextBox();
             this.Btn_Wrk_Dir = new System.Windows.Forms.Button();
-            this.FolderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.Btn_Video = new System.Windows.Forms.Button();
             this.Btn_mp3 = new System.Windows.Forms.Button();
             this.Btn_Clear_Link = new System.Windows.Forms.Button();
@@ -57,7 +56,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(9, 40);
+            this.label1.Location = new System.Drawing.Point(9, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 42);
             this.label1.TabIndex = 0;
@@ -66,13 +65,14 @@
             // 
             // Tbx_Link
             // 
+            this.Tbx_Link.AllowDrop = true;
             this.Tbx_Link.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Tbx_Link.Location = new System.Drawing.Point(116, 21);
+            this.Tbx_Link.Location = new System.Drawing.Point(116, 6);
             this.Tbx_Link.Multiline = true;
             this.Tbx_Link.Name = "Tbx_Link";
             this.Tbx_Link.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Tbx_Link.Size = new System.Drawing.Size(493, 88);
-            this.Tbx_Link.TabIndex = 1;
+            this.Tbx_Link.Size = new System.Drawing.Size(556, 109);
+            this.Tbx_Link.TabIndex = 0;
             // 
             // Tbx_Wrk_Dir
             // 
@@ -122,9 +122,9 @@
             // Btn_Clear_Link
             // 
             this.Btn_Clear_Link.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.Btn_Clear_Link.Location = new System.Drawing.Point(615, 40);
+            this.Btn_Clear_Link.Location = new System.Drawing.Point(8, 57);
             this.Btn_Clear_Link.Name = "Btn_Clear_Link";
-            this.Btn_Clear_Link.Size = new System.Drawing.Size(57, 51);
+            this.Btn_Clear_Link.Size = new System.Drawing.Size(102, 31);
             this.Btn_Clear_Link.TabIndex = 22;
             this.Btn_Clear_Link.Text = "清空 Clear";
             this.Btn_Clear_Link.UseVisualStyleBackColor = true;
@@ -295,7 +295,7 @@
         private System.Windows.Forms.TextBox Tbx_Link;
         internal System.Windows.Forms.TextBox Tbx_Wrk_Dir;
         internal System.Windows.Forms.Button Btn_Wrk_Dir;
-        internal System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog1;
+        
         internal System.Windows.Forms.Button Btn_Video;
         internal System.Windows.Forms.Button Btn_mp3;
         internal System.Windows.Forms.Button Btn_Clear_Link;
