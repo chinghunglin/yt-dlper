@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Data;
 using System.Linq;
@@ -278,7 +278,7 @@ namespace yt_dlper
         }
 
         private void Disable_Download_Btns()
-        { 
+        {
             Btn_Video.Enabled = false;
             Btn_mp3.Enabled = false;
         }
@@ -290,7 +290,7 @@ namespace yt_dlper
         }
 
         private string Analysis_Download_Result(string str_to_check)
-        { 
+        {
             if (str_to_check.Contains("has already been downloaded")) {
                 OK_cnt++;
                 return "已經下載過此檔案。Already been downloaded";
@@ -358,7 +358,7 @@ namespace yt_dlper
             // 建立 Process 物件並設定相關屬性
             Process process = new Process();
             process.StartInfo.FileName = "powershell.exe";
-            process.StartInfo.Arguments = $"-Command \"{Update_Command}\"";
+            process.StartInfo.Arguments = $"-Command \"$OutputEncoding = [System.Text.Encoding]::UTF8; {Update_Command}\" ";
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
@@ -444,7 +444,7 @@ namespace yt_dlper
                 StartInfo =
                 {
                     FileName = "powershell.exe",
-                    Arguments = $"-Command \"{fullCommand}\"",
+                    Arguments = $"-Command \"$OutputEncoding = [System.Text.Encoding]::UTF8; {fullCommand}\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -500,10 +500,10 @@ namespace yt_dlper
                         finalOutput = outputBuilder.ToString();
                     }
                     Tbx_Info.AppendText(Analysis_Download_Result(finalOutput) + "\r\n");
-                    Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下载OK.\r\n");
+                    Tbx_Info.AppendText($"{OK_cnt}/{Total_cnt} 下載OK.\r\n");
                     if (NG_cnt > 0)
                     {
-                        Tbx_Info.AppendText($"{NG_cnt} 下载NG.\r\n");
+                        Tbx_Info.AppendText($"{NG_cnt} 下載NG.\r\n");
                     }
                     ScrollToCaret(this.Tbx_Info);
                 });
