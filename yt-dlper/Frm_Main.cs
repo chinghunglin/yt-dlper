@@ -431,7 +431,8 @@ namespace yt_dlper
             {
                 fullCommand = $"{Exe_Name} {Mp3_Parameters}";
             }
-            fullCommand += $" -P \"{Wrk_Dir}\"  {link.Trim()}";
+
+            fullCommand += $" -P \'{Wrk_Dir}\'  {link.Trim()}";
 
             this.Invoke((MethodInvoker)delegate
             {
